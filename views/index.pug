@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1 CHAT.a
+  p#users  
+  ul#messages
+  form(action="")
+    label#nickLabel(for= 'nick') Nick:
+    input#nick(type="text")
+    label#messageLabel(form= 'message') Mensaje:
+    input#message(type="text")
+    button#btnSend Enviar
+  script(src="/socket.io/socket.io.js")
+  script(src="https://code.jquery.com/jquery-3.3.1.min.js")
+  script. 
+    var socket = io()
+    $('#btnSend').click(() => {
+      socket.emit('chat message', {
+        nick: $('#nick').val(),
+        message: $('#message').val()
+      })
+      //- PARA los eventos siguientes para que el botón no refresque la página
+      return false  
+    })
+    socket.on('chat message', (res)=>{
+      $('#messages').append(`<li>${res.nick}: ${res.message}</li>` )
+    } )
+    socket.on('chat users', (count)=>{
+      $('#users').text(`Número de usuarios conectados: ${count}`)
+    })
+    
+  

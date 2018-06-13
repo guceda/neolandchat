@@ -1,0 +1,5 @@
+El servidor dentro de una aplicación express se encuentra en www y el cliente dentro de las vistas. 
+
+1. En WWW arancamos el servidor socket.io
+2. En LAYOUT o en la vista que usemos, importamos el script de socket.io para conectar el servidor con el cliente
+3. Creamos la interfaz para mandar mensajes (la vista)
